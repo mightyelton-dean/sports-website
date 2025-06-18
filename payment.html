@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - SportPredictPro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line logo-icon"></i>
+                SportPredictPro
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
+                    <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
+                    <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="payment-page">
+        <div class="container">
+            <h1 class="section-title">VIP Membership Payment</h1>
+            <p>Choose your payment method to unlock exclusive VIP predictions.</p>
+
+            <div class="payment-options">
+                <div class="payment-option">
+                    <i class="fab fa-paypal"></i>
+                    <h3>PayPal</h3>
+                    <p>Pay securely with your PayPal account.</p>
+                    <button class="btn btn-primary">Pay with PayPal</button>
+                </div>
+                <div class="payment-option">
+                    <i class="fab fa-cc-visa"></i>
+                    <h3>Credit Card</h3>
+                    <p>Pay with your Visa, Mastercard, or American Express.</p>
+                    <form class="credit-card-form">
+                        <div class="form-group">
+                            <label for="card-number">Card Number:</label>
+                            <input type="text" id="card-number" name="card-number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date:</label>
+                            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV:</label>
+                            <input type="text" id="cvv" name="cvv" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Pay with Credit Card
