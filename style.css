@@ -941,3 +941,114 @@
                 left: 100%;
             }
         }
+        /* --- HEADER & NAVIGATION --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    position: relative;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logo-icon {
+    color: #2980b9;
+    font-size: 1.8rem;
+  }
+  
+  /* Navigation for desktop */
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    background: none;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus {
+    color: #2980b9;
+    background: #f0f4fa;
+  }
+  
+  /* Mobile menu button hidden by default */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: #222;
+    z-index: 2001;
+  }
+  
+  /* --- RESPONSIVE NAVIGATION --- */
+  @media (max-width: 900px) {
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 0;
+      left: 0;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      z-index: 2000;
+      padding: 1.5rem 0;
+      margin: 0;
+      border-radius: 0 0 10px 10px;
+      animation: none;
+    }
+    .nav-menu.show {
+      display: flex;
+      animation: slideDown 0.3s forwards;
+    }
+    .mobile-menu-btn {
+      display: block;
+    }
+  }
+  @media (min-width: 901px) {
+    .nav-menu {
+      display: flex !important;
+      position: static;
+      flex-direction: row;
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      animation: none !important;
+    }
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+  
+  /* Simple fade/slide animations for menu show/hide */
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  @keyframes slideUp {
+    from { opacity: 1; transform: translateY(0);}
+    to { opacity: 0; transform: translateY(-15px);}
+  }
