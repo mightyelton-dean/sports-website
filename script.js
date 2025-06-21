@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Mobile Menu Toggle with Animation
-  const mobileMenuBtn = document.querySelector(".mobile-menu");
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
   const navUl = document.querySelector("nav ul");
 
   mobileMenuBtn.addEventListener("click", function () {
