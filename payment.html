@@ -1,63 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - SportPredictPro</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - SportPredictPro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .payment-methods { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 32px; justify-content: center;}
+    .payment-option { flex: 1 1 260px; background: #fff; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; min-width: 260px; max-width: 320px;}
+    .payment-option i { font-size: 2.2rem; margin-bottom: 12px; }
+    .payment-option img { width: 36px; height: 36px; margin-bottom: 12px; }
+    .hidden { display: none !important; }
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999;}
+    .modal { background: #fff; padding: 32px 24px; border-radius: 10px; box-shadow: 0 2px 16px rgba(0,0,0,0.15); text-align: center; max-width: 350px;}
+    .crypto-address { font-family: monospace; background: #f5f5f5; padding: 8px 16px; border-radius: 6px; margin: 12px 0; word-break: break-all;}
+    .btn { margin-top: 8px; }
+    .qr-code { display:block; margin: 10px auto; max-width: 150px; }
+    .modal-footer { margin-top: 18px; }
+    .btn-primary { background-color: #007bff; color: #fff; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; }
+    .btn-secondary { background-color: #333; color: #fff; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer; }
+    .btn-primary:disabled, .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
+  </style>
 </head>
 <body>
-    <!-- Header/Navigation -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-chart-line logo-icon"></i>
-                SportPredictPro
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
-                    <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
-                    <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </div>
-    </header>
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <i class="fas fa-chart-line logo-icon"></i>
+      SportPredictPro
+    </div>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
+        <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
+        <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+  </div>
+</header>
 
-    <!-- Main Content -->
-    <main class="payment-page">
-        <div class="container">
-            <h1 class="section-title">VIP Membership Payment</h1>
-            <p>Choose your payment method to unlock exclusive VIP predictions.</p>
+<main class="payment-page">
+  <div class="container">
+    <h1 class="section-title">VIP Membership Payment</h1>
+    <p>Choose your preferred payment method to unlock exclusive VIP predictions.</p>
+    <div class="payment-methods">
+      <!-- Card/Stripe -->
+      <div class="payment-option">
+        <i class="fab fa-cc-stripe" style="color: #635bff"></i>
+        <h3>Credit/Debit Card</h3>
+        <p>Pay securely using any major card powered by Stripe.</p>
+        <button class="btn btn-primary" id="stripePayBtn">Pay with Card</button>
+      </div>
+      <!-- PayPal -->
+      <div class="payment-option">
+        <i class="fab fa-paypal" style="color: #003087"></i>
+        <h3>PayPal</h3>
+        <p>Pay via your PayPal account.</p>
+        <button class="btn btn-primary" id="paypalPayBtn">Pay with PayPal</button>
+      </div>
+      <!-- Apple Pay -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/ios-filled/50/000000/apple-pay.png" alt="Apple Pay" />
+        <h3>Apple Pay</h3>
+        <p>Easy payment with Apple Pay.</p>
+        <button class="btn btn-primary" id="applePayBtn">Pay with Apple Pay</button>
+      </div>
+      <!-- Google Pay -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/color/48/000000/google-pay-india.png" alt="Google Pay" />
+        <h3>Google Pay</h3>
+        <p>Pay with Google Pay on your device.</p>
+        <button class="btn btn-primary" id="googlePayBtn">Pay with Google Pay</button>
+      </div>
+      <!-- Mobile Money -->
+      <div class="payment-option">
+        <i class="fas fa-mobile-alt" style="color: #009688"></i>
+        <h3>Mobile Money</h3>
+        <p>Pay with MTN, Airtel, M-Pesa, etc.</p>
+        <button class="btn btn-primary" id="mobileMoneyBtn">Pay with Mobile Money</button>
+      </div>
+      <!-- Bank Transfer -->
+      <div class="payment-option">
+        <i class="fas fa-university" style="color: #2d3436"></i>
+        <h3>Bank Transfer</h3>
+        <p>Transfer directly to our bank account.</p>
+        <button class="btn btn-primary" id="bankTransferBtn">Bank Transfer Info</button>
+      </div>
+      <!-- Crypto -->
+      <div class="payment-option">
+        <i class="fab fa-bitcoin" style="color: orange"></i>
+        <h3>Crypto Payment</h3>
+        <p>Bitcoin, Ethereum, USDT, BNB, DOGE, and more.</p>
+        <button class="btn btn-primary" id="cryptoPayBtn">Pay with Crypto</button>
+      </div>
+      <!-- Western Union -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/ios-filled/50/000000/western-union.png" alt="Western Union" />
+        <h3>Western Union</h3>
+        <p>Send via Western Union.</p>
+        <button class="btn btn-primary" id="wuPayBtn">Western Union Info</button>
+      </div>
+      <!-- MoneyGram -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/color/48/000000/moneygram.png" alt="MoneyGram" />
+        <h3>MoneyGram</h3>
+        <p>Send via MoneyGram.</p>
+        <button class="btn btn-primary" id="mgPayBtn">MoneyGram Info</button>
+      </div>
+      <!-- AliPay -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/color/48/000000/alipay.png" alt="AliPay" />
+        <h3>AliPay</h3>
+        <p>Pay with AliPay.</p>
+        <button class="btn btn-primary" id="alipayBtn">Pay with AliPay</button>
+      </div>
+      <!-- WeChat Pay -->
+      <div class="payment-option">
+        <img src="https://img.icons8.com/color/48/000000/weixing.png" alt="WeChat Pay" />
+        <h3>WeChat Pay</h3>
+        <p>Pay with WeChat Pay.</p>
+        <button class="btn btn-primary" id="wechatPayBtn">Pay with WeChat Pay</button>
+      </div>
+    </div>
+    <!-- Success Message -->
+    <div id="paymentSuccessMsg" class="hidden" style="margin-top:30px; text-align:center;">
+      <div style="font-size:2rem; color:green;"><i class="fas fa-check-circle"></i></div>
+      <h2>Payment Successful!</h2>
+      <p>Redirecting you to VIP page...</p>
+    </div>
+  </div>
+</main>
 
-            <div class="payment-options">
-                <div class="payment-option">
-                    <i class="fab fa-paypal"></i>
-                    <h3>PayPal</h3>
-                    <p>Pay securely with your PayPal account.</p>
-                    <button class="btn btn-primary">Pay with PayPal</button>
-                </div>
-                <div class="payment-option">
-                    <i class="fab fa-cc-visa"></i>
-                    <h3>Credit Card</h3>
-                    <p>Pay with your Visa, Mastercard, or American Express.</p>
-                    <form class="credit-card-form">
-                        <div class="form-group">
-                            <label for="card-number">Card Number:</label>
-                            <input type="text" id="card-number" name="card-number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="expiry-date">Expiry Date:</label>
-                            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvv">CVV:</label>
-                            <input type="text" id="cvv" name="cvv" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Pay with Credit Card
+<!-- All Modals share .modal-bg for easy hiding -->
+<div id="cryptoModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Send Crypto Payment</h2>
+    <p>Choose your crypto and send the exact amount to the address below:</p>
+    <div style="margin-bottom:10px;">
+      <strong>Bitcoin (BTC):</strong>
+      <div class="crypto-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" class="qr-code" alt="BTC QR" />
+    </div>
+    <div style="margin-bottom:10px;">
+      <strong>Ethereum (ETH):</strong>
+      <div class="crypto-address">0x1234567890abcdef1234567890abcdef12345678</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=0x1234567890abcdef1234567890abcdef12345678" class="qr-code" alt="ETH QR" />
+    </div>
+    <div style="margin-bottom:10px;">
+      <strong>USDT (TRC20):</strong>
+      <div class="crypto-address">TSJ7Jf9G2v7Gf4g7z3XoK8wQ7s3qJcYwVq</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=TSJ7Jf9G2v7Gf4g7z3XoK8wQ7s3qJcYwVq" class="qr-code" alt="USDT QR" />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmCryptoBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+    <p style="font-size:13px; color:#888; margin-top:14px;">* Payment is simulated for demo purposes.</p>
+  </div>
+</div>
+
+<div id="mobileModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Mobile Money Payment</h2>
+    <p>Send your payment to the Mobile Money number below:</p>
+    <div class="crypto-address">MTN: +2347012345678</div>
+    <div class="crypto-address">Airtel: +2348012345678</div>
+    <div class="crypto-address">M-Pesa: +254701234567</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmMobileBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="bankModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Bank Transfer Details</h2>
+    <p>Transfer to the following account:</p>
+    <div class="crypto-address">Bank: Zenith Bank<br>Acc Name: SportPredictPro<br>Acc Number: 1234567890<br>SWIFT: ZEIBNGLA</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmBankBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="wuModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>Western Union Info</h2>
+    <p>Receiver Name: John Doe<br>Country: Nigeria</p>
+    <div class="crypto-address">After payment, send MTCN code to support@sportpredictpro.com</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmWUBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="mgModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>MoneyGram Info</h2>
+    <p>Receiver Name: John Doe<br>Country: Nigeria</p>
+    <div class="crypto-address">After payment, send Ref Code to support@sportpredictpro.com</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmMGBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="alipayModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>AliPay Payment</h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=alipay1234567890" class="qr-code" alt="AliPay QR" />
+    <div class="crypto-address">AliPay ID: 1234567890</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmAliPayBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="wechatModal" class="modal-bg hidden">
+  <div class="modal">
+    <h2>WeChat Pay Payment</h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=wechatpay1234567890" class="qr-code" alt="WeChat QR" />
+    <div class="crypto-address">WeChat Pay ID: 1234567890</div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="confirmWeChatBtn">I've Paid</button>
+      <button class="btn btn-secondary close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <!-- ... your existing footer ... -->
+  </div>
+</footer>
+<script>
+  // Helper: simulate payment success
+  function onPaymentSuccess() {
+    localStorage.setItem('vipStatus', 'active');
+    document.querySelector('.payment-methods').classList.add('hidden');
+    document.getElementById('paymentSuccessMsg').classList.remove('hidden');
+    setTimeout(() => window.location.href = 'vip.html', 1800);
+  }
+
+  // Show only the modal you want, hide all others first
+  function showModal(id) {
+    document.querySelectorAll('.modal-bg').forEach(m => m.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  // Hide all modals
+  function hideAllModals() {
+    document.querySelectorAll('.modal-bg').forEach(m => m.classList.add('hidden'));
+  }
+
+  // Payment method triggers
+  document.getElementById('cryptoPayBtn').onclick = function() { showModal('cryptoModal'); };
+  document.getElementById('mobileMoneyBtn').onclick = function() { showModal('mobileModal'); };
+  document.getElementById('bankTransferBtn').onclick = function() { showModal('bankModal'); };
+  document.getElementById('wuPayBtn').onclick = function() { showModal('wuModal'); };
+  document.getElementById('mgPayBtn').onclick = function() { showModal('mgModal'); };
+  document.getElementById('alipayBtn').onclick = function() { showModal('alipayModal'); };
+  document.getElementById('wechatPayBtn').onclick = function() { showModal('wechatModal'); };
+
+  // Card/Stripe, PayPal, Apple Pay, Google Pay: these just simulate direct payment
+  document.getElementById('stripePayBtn').onclick = function() { this.disabled = true; this.textContent = "Processing..."; setTimeout(onPaymentSuccess, 1300); };
+  document.getElementById('paypalPayBtn').onclick = function() { this.disabled = true; this.textContent = "Redirecting to PayPal..."; setTimeout(onPaymentSuccess, 1600); };
+  document.getElementById('applePayBtn').onclick = function() { this.disabled = true; this.textContent = "Processing..."; setTimeout(onPaymentSuccess, 1300); };
+  document.getElementById('googlePayBtn').onclick = function() { this.disabled = true; this.textContent = "Processing..."; setTimeout(onPaymentSuccess, 1300); };
+
+  // All close buttons (use .close-modal-btn class!)
+  document.querySelectorAll('.close-modal-btn').forEach(btn => {
+    btn.onclick = hideAllModals;
+  });
+
+  // All confirm "I've Paid" buttons for modals that require confirmation
+  document.getElementById('confirmCryptoBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmMobileBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmBankBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmWUBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmMGBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmAliPayBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+  document.getElementById('confirmWeChatBtn').onclick = function() { hideAllModals(); onPaymentSuccess(); };
+
+  // Prevent modals from auto-opening or payment auto-processing
+  // Only user actions can show a modal or trigger payment
+</script>
+<script src="script.js"></script>
+</body>
+</html>

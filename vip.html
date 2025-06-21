@@ -6,6 +6,36 @@
     <title>VIP - SportPredictPro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .vip-content {
+            margin-top: 30px;
+            background: #f9f9f9;
+            padding: 32px 24px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .vip-content h2 {
+            color: #caa300;
+        }
+        .vip-content ul {
+            margin-top: 16px;
+        }
+        .vip-content li {
+            margin-bottom: 8px;
+        }
+        .btn-logout {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+        .btn-logout:hover {
+            background: #c0392b;
+        }
+    </style>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -34,8 +64,16 @@
     <main class="vip-page">
         <div class="container">
             <h1 class="section-title">VIP Membership</h1>
-            <!-- VIP content will go here (pricing, features, benefits, signup form, etc.) -->
-            <p id="vip-content">Unlock premium predictions and exclusive benefits with our VIP membership!</p>
+            <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
+            <div class="vip-content" style="display:none;">
+                <h2>Exclusive VIP Predictions</h2>
+                <p>Here are today's premium predictions with an 85% accuracy rate.</p>
+                <ul>
+                    <li>Match 1: Team A vs. Team B - Tip: Team A to win</li>
+                    <li>Match 2: Team C vs. Team D - Tip: Over 2.5 goals</li>
+                    <!-- More VIP predictions here -->
+                </ul>
+            </div>
         </div>
     </main>
 
@@ -73,20 +111,28 @@
             </div>
         </div>
     </footer>
-
     <script>
-        // Client-side check (example using localStorage)
+        // VIP access control
         document.addEventListener('DOMContentLoaded', function() {
-            const vipStatus = localStorage.getItem('vipStatus'); // Or check a cookie
-
-            if (vipStatus !== 'active') {
-                // Redirect to login/payment page
-                window.location.href = 'payment.html'; // Replace with your actual payment page
+            const vipStatus = localStorage.getItem('vipStatus');
+            const vipContent = document.querySelector('.vip-content');
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (vipStatus === 'active') {
+                vipContent.style.display = 'block';
+                logoutBtn.style.display = 'inline-block';
             } else {
-                // User is VIP, show content (or fetch it from the server)
-                document.getElementById('vip-content').textContent = 'Welcome, VIP member! Here are your exclusive predictions.';
+                // Not paid, redirect to payment page after short notification
+                alert("VIP access is restricted. Please make payment to access VIP content.");
+                window.location.href = "payment.html";
             }
+
+            // Logout button to simulate log out (remove VIP access)
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('vipStatus');
+                window.location.href = "index.html";
+            });
         });
     </script>
+    <script src="script.js"></script>
 </body>
 </html>

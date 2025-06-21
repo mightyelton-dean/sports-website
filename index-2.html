@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Protected Webpage</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .container { max-width: 400px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+    .hidden { display: none; }
+    button { padding: 8px 18px; margin-top: 15px; }
+    h2 { color: #333; }
+  </style>
+</head>
+<body>
+  <div class="container" id="login-section">
+    <h2>Login to Access Content</h2>
+    <button onclick="handleLogin()">Login</button>
+  </div>
+
+  <div class="container hidden" id="register-section">
+    <h2>Register to Access</h2>
+    <button onclick="handleRegister()">Register</button>
+  </div>
+
+  <div class="container hidden" id="payment-section">
+    <h2>Payment Required</h2>
+    <p>Pay $10 to access the content.</p>
+    <button onclick="handlePayment()">Pay Now</button>
+  </div>
+
+  <div class="container hidden" id="content-section">
+    <h2>Secret Content</h2>
+    <p>🎉 Welcome! You have paid and are logged in. Enjoy the content.</p>
+  </div>
+
+  <script>
+    // Simulate user data
+    let hasPaid = localStorage.getItem('hasPaid') === 'true';
+    let isRegistered = localStorage.getItem('isRegistered') === 'true';
+
+    function showSection(sectionId) {
+      document.getElementById('login-section').classList.add('hidden');
+      document.getElementById('register-section').classList.add('hidden');
+      document.getElementById('payment-section').classList.add('hidden');
+      document.getElementById('content-section').classList.add('hidden');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function handleLogin() {
+      if (hasPaid) {
+        // User has paid, show content
+        showSection('content-section');
+      } else if (isRegistered) {
+        // Registered but not paid, go to payment
+        showSection('payment-section');
+      } else {
+        // Not registered, go to register
+        showSection('register-section');
+      }
+    }
+
+    function handleRegister() {
+      isRegistered = true;
+      localStorage.setItem('isRegistered', 'true');
+      // After registration, go to payment
+      showSection('payment-section');
+    }
+
+    function handlePayment() {
+      // Simulate payment process
+      setTimeout(() => {
+        hasPaid = true;
+        localStorage.setItem('hasPaid', 'true');
+        showSection('content-section');
+      }, 1000); // Simulate payment delay
+    }
+
+    // On load, show login section
+    showSection('login-section');
+  </script>
+</body>
+</html>
