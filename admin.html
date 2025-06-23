@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - SportPredictPro</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      .admin-section {
+        max-width: 700px;
+        margin: 60px auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
+        padding: 32px;
+      }
+      .admin-section h2 {
+        color: var(--primary-color);
+        margin-bottom: 18px;
+      }
+      .admin-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .admin-form input,
+      .admin-form textarea {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+      }
+      .admin-form textarea {
+        min-height: 80px;
+      }
+      .admin-form button {
+        align-self: flex-end;
+      }
+      .admin-content-list {
+        margin-top: 24px;
+      }
+      .admin-content-item {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        animation: fadeInUp 0.7s;
+      }
+      .admin-content-item h4 {
+        margin-bottom: 6px;
+        color: var(--vip-color);
+      }
+      .admin-content-item .date {
+        font-size: 0.9em;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      .admin-tabs {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+      .admin-tab {
+        cursor: pointer;
+        padding: 8px 18px;
+        border-radius: 20px;
+        background: #f0f4fa;
+        color: #333;
+        font-weight: 500;
+        transition: background 0.2s;
+      }
+      .admin-tab.active {
+        background: var(--primary-color);
+        color: #fff;
+      }
+      .admin-logout {
+        float: right;
+        color: var(--accent-color);
+        cursor: pointer;
+        font-size: 1.1em;
+      }
+      .admin-logout:hover {
+        text-decoration: underline;
+      }
+      .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        border-radius: 8px;
+        padding: 24px;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      }
+      .modal h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        color: var(--primary-color);
+      }
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <i class="fas fa-chart-line logo-icon"></i> SportPredictPro Admin
+        </div>
+        <span class="admin-logout" id="adminLogout">Logout</span>
+      </div>
+    </header>
+    <main>
+      <section class="admin-section">
+        <div class="admin-tabs">
+          <div class="admin-tab active" id="tab-expert">Expert Tips</div>
+          <div class="admin-tab" id="tab-vip">VIP Content</div>
+        </div>
+        <form class="admin-form" id="expertForm">
+          <h2>Post Expert Tip</h2>
+          <input type="text" id="expertTitle" placeholder="Title" required />
+          <textarea
+            id="expertContent"
+            placeholder="Content"
+            required
+          ></textarea>
+          <button class="btn btn-primary" type="submit">Post Tip</button>
+        </form>
+        <form class="admin-form hidden" id="vipForm">
+          <h2>Post VIP Content</h2>
+          <input type="text" id="vipTitle" placeholder="Title" required />
+          <textarea id="vipContent" placeholder="Content" required></textarea>
+          <button class="btn btn-vip" type="submit">Post VIP</button>
+        </form>
+        <div class="admin-content-list" id="adminContentList"></div>
+      </section>
+    </main>
+    <script>
+      // --- Admin Authentication (JWT & Role) ---
+      (async function checkAdmin() {
+        const token = localStorage.getItem("jwt");
+        if (!token) {
+          window.location.href = "logins.html";
+          return;
+        }
+        try {
+          const res = await fetch(
+            "https://your-backend-domain.com/api/v1/auth/me",
+            {
+              headers: { Authorization: "Bearer " + token },
+            }
+          );
+          if (!res.ok) throw new Error();
+          const user = await res.json();
+          if (!user.role || user.role !== "admin") {
+            showToast("Admin access only!", true);
+            setTimeout(() => (window.location.href = "index.html"), 1200);
+          }
+        } catch {
+          window.location.href = "logins.html";
+        }
+      })();
+      // --- Tab Switching ---
+      const tabExpert = document.getElementById("tab-expert");
+      const tabVIP = document.getElementById("tab-vip");
+      const expertForm = document.getElementById("expertForm");
+      const vipForm = document.getElementById("vipForm");
+      const adminContentList = document.getElementById("adminContentList");
+      let currentTab = "expert";
+      tabExpert.onclick = () => {
+        tabExpert.classList.add("active");
+        tabVIP.classList.remove("active");
+        expertForm.classList.remove("hidden");
+        vipForm.classList.add("hidden");
+        currentTab = "expert";
+        fetchContent();
+      };
+      tabVIP.onclick = () => {
+        tabVIP.classList.add("active");
+        tabExpert.classList.remove("active");
+        vipForm.classList.remove("hidden");
+        expertForm.classList.add("hidden");
+        currentTab = "vip";
+        fetchContent();
+      };
+      // --- Post Expert Tip ---
+      expertForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const title = document.getElementById("expertTitle").value.trim();
+        const content = document.getElementById("expertContent").value.trim();
+        if (!title || !content) {
+          showToast("Title and content required!", true);
+          return;
+        }
+        const res = await fetch(
+          "https://your-backend-domain.com/api/v1/admin/expert-tips",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({ title, content }),
+          }
+        );
+        if (res.ok) {
+          showToast("Expert tip posted!");
+          expertForm.reset();
+          fetchContent();
+        } else {
+          showToast("Failed to post expert tip", true);
+        }
+      };
+      // --- Post VIP Content ---
+      vipForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const title = document.getElementById("vipTitle").value.trim();
+        const content = document.getElementById("vipContent").value.trim();
+        if (!title || !content) {
+          showToast("Title and content required!", true);
+          return;
+        }
+        const res = await fetch(
+          "https://your-backend-domain.com/api/v1/admin/vip-content",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({ title, content }),
+          }
+        );
+        if (res.ok) {
+          showToast("VIP content posted!");
+          vipForm.reset();
+          fetchContent();
+        } else {
+          showToast("Failed to post VIP content", true);
+        }
+      };
+      // --- Fetch Content ---
+      async function fetchContent() {
+        adminContentList.innerHTML =
+          '<div style="text-align:center;">Loading...</div>';
+        let url =
+          currentTab === "expert"
+            ? "https://your-backend-domain.com/api/v1/admin/expert-tips"
+            : "https://your-backend-domain.com/api/v1/admin/vip-content";
+        let headers = { Authorization: "Bearer " + token };
+        if (currentTab === "expert") headers = {}; // expert tips are public
+        const res = await fetch(url, { headers });
+        const data = await res.json();
+        let items =
+          (currentTab === "expert" ? data.tips : data.vipContent) || [];
+        if (!items.length) {
+          adminContentList.innerHTML =
+            '<div style="text-align:center;">No content yet.</div>';
+          return;
+        }
+        adminContentList.innerHTML = items
+          .map(
+            (item) => `
+        <div class="admin-content-item animate__animated animate__fadeInUp">
+          <h4>${item.title}</h4>
+          <div class="date">${new Date(item.createdAt).toLocaleString()}</div>
+          <div>${item.content.replace(/\n/g, "<br>")}</div>
+          <button class='btn btn-secondary edit-btn' data-id='${
+            item._id
+          }' style='margin-top:10px;margin-right:8px;'>Edit</button>
+          <button class='btn btn-secondary delete-btn' data-id='${
+            item._id
+          }' style='margin-top:10px;'>Delete</button>
+        </div>
+      `
+          )
+          .join("");
+      }
+      fetchContent();
+      // --- UI Animation Polish ---
+      adminContentList.addEventListener("DOMNodeInserted", function (e) {
+        if (
+          e.target.classList &&
+          e.target.classList.contains("admin-content-item")
+        ) {
+          e.target.style.opacity = 0;
+          setTimeout(() => {
+            e.target.style.opacity = 1;
+          }, 50);
+        }
+      });
+      // --- Toast Notification ---
+      function showToast(message, isError = false) {
+        let toast = document.getElementById("toast-notification");
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.id = "toast-notification";
+          toast.style.position = "fixed";
+          toast.style.bottom = "30px";
+          toast.style.left = "50%";
+          toast.style.transform = "translateX(-50%)";
+          toast.style.background = isError ? "#e74c3c" : "#27ae60";
+          toast.style.color = "#fff";
+          toast.style.padding = "14px 32px";
+          toast.style.borderRadius = "8px";
+          toast.style.fontSize = "1.1rem";
+          toast.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+          toast.style.zIndex = 99999;
+          document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.style.display = "block";
+        setTimeout(() => {
+          toast.style.display = "none";
+        }, 3000);
+      }
+      // --- Logout ---
+      document.getElementById("adminLogout").onclick = function () {
+        localStorage.removeItem("jwt");
+        window.location.href = "logins.html";
+      };
+      // --- Content Deletion (with confirmation) ---
+      adminContentList.onclick = async function (e) {
+        if (e.target.classList.contains("delete-btn")) {
+          if (!confirm("Are you sure you want to delete this content?")) return;
+          const id = e.target.dataset.id;
+          const type = currentTab === "expert" ? "expert-tips" : "vip-content";
+          const res = await fetch(
+            `https://your-backend-domain.com/api/v1/admin/${type}/` + id,
+            {
+              method: "DELETE",
+              headers: { Authorization: "Bearer " + token },
+            }
+          );
+          if (res.ok) {
+            showToast("Content deleted!");
+            fetchContent();
+          } else {
+            showToast("Failed to delete content", true);
+          }
+        }
+        // --- Content Editing (inline, modal) ---
+        if (e.target.classList.contains("edit-btn")) {
+          const id = e.target.dataset.id;
+          const type = currentTab === "expert" ? "expert-tips" : "vip-content";
+          const item = Array.from(adminContentList.children).find(
+            (div) => div.querySelector(".edit-btn")?.dataset.id === id
+          );
+          if (!item) return;
+          const titleEl = item.querySelector("h4");
+          const contentEl = item.querySelector("div:not(.date)");
+          const oldTitle = titleEl.textContent;
+          const oldContent = contentEl.innerHTML.replace(/<br>/g, "\n");
+          // Show modal for editing
+          let modal = document.getElementById("editModal");
+          if (!modal) {
+            modal = document.createElement("div");
+            modal.id = "editModal";
+            modal.className = "modal-bg";
+            modal.innerHTML = `
+        <div class="modal">
+          <h2>Edit Content</h2>
+          <input id="editTitle" style="width:100%;margin-bottom:10px;" />
+          <textarea id="editContent" style="width:100%;min-height:80px;"></textarea>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="saveEditBtn">Save</button>
+            <button class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+          </div>
+        </div>
+      `;
+            document.body.appendChild(modal);
+          }
+          document.getElementById("editTitle").value = oldTitle;
+          document.getElementById("editContent").value = oldContent;
+          modal.classList.remove("hidden");
+          document.getElementById("cancelEditBtn").onclick = () =>
+            modal.classList.add("hidden");
+          document.getElementById("saveEditBtn").onclick = async function () {
+            const newTitle = document.getElementById("editTitle").value.trim();
+            const newContent = document
+              .getElementById("editContent")
+              .value.trim();
+            if (!newTitle || !newContent) {
+              showToast("Title and content required!", true);
+              return;
+            }
+            const res = await fetch(
+              `https://your-backend-domain.com/api/v1/admin/${type}/` + id,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + token,
+                },
+                body: JSON.stringify({ title: newTitle, content: newContent }),
+              }
+            );
+            if (res.ok) {
+              showToast("Content updated!");
+              modal.classList.add("hidden");
+              fetchContent();
+            } else {
+              showToast("Failed to update content", true);
+            }
+          };
+        }
+      };
+    </script>
+  </body>
+</html>

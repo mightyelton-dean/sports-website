@@ -1,95 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expert Tips - SportPredictPro</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body>
     <!-- Header/Navigation -->
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-chart-line logo-icon"></i>
-                SportPredictPro
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
-                    <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
-                    <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+      <div class="header-container">
+        <div class="logo">
+          <i class="fas fa-chart-line logo-icon"></i>
+          SportPredictPro
         </div>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
+            <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
+            <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="expert-tips-page">
-        <div class="container">
-            <h1 class="section-title">Expert Tips</h1>
-            <div class="tips-container">
-                <div class="tips-header">
-                    <div>Match</div>
-                    <div>Tip</div>
-                    <div>Confidence</div>
-                </div>
-                <div class="tip-item">
-                    <div>Team X vs. Team Y</div>
-                    <div>Over 2.5 Goals</div>
-                    <div>High</div>
-                </div>
-                <div class="tip-item">
-                    <div>Team A vs. Team B</div>
-                    <div>Team A to Win</div>
-                    <div>Medium</div>
-                </div>
-                <!-- More tip items -->
-            </div>
+      <div class="container">
+        <h1 class="section-title">Expert Tips</h1>
+        <div class="tips-container">
+          <div class="tips-header">
+            <div>Title</div>
+            <div>Content</div>
+            <div>Date</div>
+          </div>
+          <div id="expertTipsList"></div>
         </div>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3 class="footer-logo">
-                        <i class="fas fa-chart-line"></i>
-                        SportPredictPro
-                    </h3>
-                    <p>Your trusted source for accurate sports predictions and live scores.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="livescore.html">LiveScore</a></li>
-                        <li><a href="expert-tips.html">Expert Tips</a></li>
-                        <li><a href="vip.html">VIP</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2023 SportPredictPro. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-logo">
+              <i class="fas fa-chart-line"></i>
+              SportPredictPro
+            </h3>
+            <p>
+              Your trusted source for accurate sports predictions and live
+              scores.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="livescore.html">LiveScore</a></li>
+              <li><a href="expert-tips.html">Expert Tips</a></li>
+              <li><a href="vip.html">VIP</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="copyright">
+          <p>© 2023 SportPredictPro. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <script src="script.js"></script>
-</body>
+    <script>
+      // Animated fetch and render of expert tips
+      async function fetchExpertTips() {
+        const list = document.getElementById("expertTipsList");
+        list.innerHTML = '<div style="text-align:center;">Loading...</div>';
+        try {
+          const res = await fetch(
+            "https://your-backend-domain.com/api/v1/admin/expert-tips"
+          );
+          const data = await res.json();
+          if (!data.tips || !data.tips.length) {
+            list.innerHTML =
+              '<div style="text-align:center;">No tips yet.</div>';
+            return;
+          }
+          list.innerHTML = data.tips
+            .map(
+              (tip) => `
+          <div class="tip-item animate__animated animate__fadeInUp">
+            <div><strong>${tip.title}</strong></div>
+            <div>${tip.content.replace(/\n/g, "<br>")}</div>
+            <div>${new Date(tip.createdAt).toLocaleString()}</div>
+          </div>
+        `
+            )
+            .join("");
+        } catch (err) {
+          list.innerHTML =
+            '<div style="text-align:center; color:red;">Failed to load tips.</div>';
+        }
+      }
+      document.addEventListener("DOMContentLoaded", fetchExpertTips);
+    </script>
+  </body>
 </html>

@@ -1,138 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIP - SportPredictPro</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-        .vip-content {
-            margin-top: 30px;
-            background: #f9f9f9;
-            padding: 32px 24px;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-        }
-        .vip-content h2 {
-            color: #caa300;
-        }
-        .vip-content ul {
-            margin-top: 16px;
-        }
-        .vip-content li {
-            margin-bottom: 8px;
-        }
-        .btn-logout {
-            background: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 9px 22px;
-            border-radius: 5px;
-            cursor: pointer;
-            float: right;
-        }
-        .btn-logout:hover {
-            background: #c0392b;
-        }
+      .vip-content {
+        margin-top: 30px;
+        background: #f9f9f9;
+        padding: 32px 24px;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      }
+      .vip-content h2 {
+        color: #caa300;
+      }
+      .vip-content ul {
+        margin-top: 16px;
+      }
+      .vip-content li {
+        margin-bottom: 8px;
+      }
+      .btn-logout {
+        background: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 9px 22px;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right;
+      }
+      .btn-logout:hover {
+        background: #c0392b;
+      }
+      .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .modal h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      .modal p {
+        color: #666;
+      }
+      .modal-footer {
+        margin-top: 20px;
+        text-align: right;
+      }
+      .btn-primary {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        background: #0056b3;
+      }
+      .hidden {
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header/Navigation -->
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-chart-line logo-icon"></i>
-                SportPredictPro
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
-                    <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
-                    <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+      <div class="header-container">
+        <div class="logo">
+          <i class="fas fa-chart-line logo-icon"></i>
+          SportPredictPro
         </div>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
+            <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
+            <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="vip-page">
-        <div class="container">
-            <h1 class="section-title">VIP Membership</h1>
-            <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
-            <div class="vip-content" style="display:none;">
-                <h2>Exclusive VIP Predictions</h2>
-                <p>Here are today's premium predictions with an 85% accuracy rate.</p>
-                <ul>
-                    <li>Match 1: Team A vs. Team B - Tip: Team A to win</li>
-                    <li>Match 2: Team C vs. Team D - Tip: Over 2.5 goals</li>
-                    <!-- More VIP predictions here -->
-                </ul>
-            </div>
+      <div class="container">
+        <h1 class="section-title">VIP Membership</h1>
+        <button class="btn-logout" id="logoutBtn" style="display: none">
+          Logout
+        </button>
+        <div class="vip-content" style="display: none">
+          <h2>Exclusive VIP Predictions</h2>
+          <ul id="vipPredictionsList"></ul>
         </div>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3 class="footer-logo">
-                        <i class="fas fa-chart-line"></i>
-                        SportPredictPro
-                    </h3>
-                    <p>Your trusted source for accurate sports predictions and live scores.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="livescore.html">LiveScore</a></li>
-                        <li><a href="expert-tips.html">Expert Tips</a></li>
-                        <li><a href="vip.html">VIP</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2023 SportPredictPro. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-logo">
+              <i class="fas fa-chart-line"></i>
+              SportPredictPro
+            </h3>
+            <p>
+              Your trusted source for accurate sports predictions and live
+              scores.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="livescore.html">LiveScore</a></li>
+              <li><a href="expert-tips.html">Expert Tips</a></li>
+              <li><a href="vip.html">VIP</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="copyright">
+          <p>© 2023 SportPredictPro. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
     <script>
-        // VIP access control
-        document.addEventListener('DOMContentLoaded', function() {
-            const vipStatus = localStorage.getItem('vipStatus');
-            const vipContent = document.querySelector('.vip-content');
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (vipStatus === 'active') {
-                vipContent.style.display = 'block';
-                logoutBtn.style.display = 'inline-block';
-            } else {
-                // Not paid, redirect to payment page after short notification
-                alert("VIP access is restricted. Please make payment to access VIP content.");
-                window.location.href = "payment.html";
+      // VIP access control (backend protected)
+      document.addEventListener("DOMContentLoaded", async function () {
+        const token = localStorage.getItem("jwt");
+        const vipContent = document.querySelector(".vip-content");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const vipList = document.getElementById("vipPredictionsList");
+        if (!token) {
+          window.location.href = "logins.html";
+          return;
+        }
+        try {
+          const res = await fetch(
+            "https://your-backend-domain.com/api/v1/vip/content",
+            {
+              headers: { Authorization: "Bearer " + token },
             }
-
-            // Logout button to simulate log out (remove VIP access)
-            logoutBtn.addEventListener('click', function() {
-                localStorage.removeItem('vipStatus');
-                window.location.href = "index.html";
-            });
-        });
+          );
+          if (res.ok) {
+            const data = await res.json();
+            vipContent.style.display = "block";
+            logoutBtn.style.display = "inline-block";
+            if (data.vipContent && Array.isArray(data.vipContent)) {
+              vipList.innerHTML = data.vipContent
+                .map(
+                  (item) =>
+                    `<li class='animate__animated animate__fadeInUp'><strong>${
+                      item.title
+                    }:</strong> ${item.content.replace(/\n/g, "<br>")}</li>`
+                )
+                .join("");
+            } else {
+              vipList.innerHTML = "<li>No VIP content yet.</li>";
+            }
+          } else {
+            // Not VIP or not logged in
+            let modal = document.getElementById("vipBlockModal");
+            if (!modal) {
+              modal = document.createElement("div");
+              modal.id = "vipBlockModal";
+              modal.className = "modal-bg";
+              modal.innerHTML = `
+                <div class="modal">
+                  <h2>VIP Access Restricted</h2>
+                  <p style="margin:18px 0 10px 0;">You must be a paid subscriber ($15) to access VIP content.</p>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary" id="goToPaymentBtn">Go to Payment</button>
+                  </div>
+                </div>
+              `;
+              document.body.appendChild(modal);
+            }
+            modal.classList.remove("hidden");
+            document.getElementById("goToPaymentBtn").onclick = function () {
+              window.location.href = "payment.html";
+            };
+          }
+          logoutBtn.addEventListener("click", function () {
+            localStorage.removeItem("vipStatus");
+            localStorage.removeItem("jwt");
+            window.location.href = "index.html";
+          });
+        } catch (err) {
+          window.location.href = "logins.html";
+        }
+      });
     </script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
