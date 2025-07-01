@@ -1,133 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP - SportPredictPro</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIP - LOGIKS BET</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-        /* Style to hide content initially */
-        .vip-content {
-            display: none;
-        }
+      /* Style to hide content initially */
+      .vip-content {
+        display: none;
+      }
 
-        /* Hover effect (applied by JavaScript) */
-        .login-link-hover {
-            background-color: #0056b3; /* Darker shade on hover */
-            color: #fff;
-        }
+      /* Hover effect (applied by JavaScript) */
+      .login-link-hover {
+        background-color: #0056b3; /* Darker shade on hover */
+        color: #fff;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header/Navigation -->
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-chart-line logo-icon"></i>
-                SportPredictPro
-            </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
-                    <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
-                    <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+      <div class="header-container">
+        <div class="logo">
+          <i class="fas fa-chart-line logo-icon"></i>
+          LOGIKS BET
         </div>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="livescore.html" class="nav-link">LiveScore</a></li>
+            <li><a href="expert-tips.html" class="nav-link">Expert Tips</a></li>
+            <li><a href="vip.html" class="nav-link vip-btn">VIP</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="vip-page">
-        <div class="container">
-            <h1 class="section-title">VIP Membership</h1>
+      <div class="container">
+        <h1 class="section-title">VIP Membership</h1>
 
-            <!-- Content shown only to VIP members -->
-            <div class="vip-content">
-                <h2>Exclusive VIP Predictions</h2>
-                <p>Here are today's premium predictions with an 85% accuracy rate.</p>
-                <ul>
-                    <li>Match 1: Team A vs. Team B - Tip: Team A to win</li>
-                    <li>Match 2: Team C vs. Team D - Tip: Over 2.5 goals</li>
-                    <!-- More VIP predictions -->
-                </ul>
-            </div>
-
-            <!-- Content shown to non-VIP members -->
-            <div class="non-vip-content">
-                <p>Unlock premium predictions and exclusive benefits with our VIP membership!</p>
-                <a href="payment.html" class="btn btn-vip">Join VIP Now</a>
-                <p>Already a member? <a href="login.html" id="loginLink" style="display: inline-block; padding: 8px 12px; font-size: 14px; font-weight: bold; text-align: center; text-decoration: none; cursor: pointer; border-radius: 5px; background-color: #007bff; color: #fff;">Login</a></p>
-            </div>
+        <!-- Content shown only to VIP members -->
+        <div class="vip-content">
+          <h2>Exclusive VIP Predictions</h2>
+          <p>Here are today's premium predictions with an 85% accuracy rate.</p>
+          <ul>
+            <li>Match 1: Team A vs. Team B - Tip: Team A to win</li>
+            <li>Match 2: Team C vs. Team D - Tip: Over 2.5 goals</li>
+            <!-- More VIP predictions -->
+          </ul>
         </div>
+
+        <!-- Content shown to non-VIP members -->
+        <div class="non-vip-content">
+          <p>
+            Unlock premium predictions and exclusive benefits with our VIP
+            membership!
+          </p>
+          <a href="payment.html" class="btn btn-vip">Join VIP Now</a>
+          <p>
+            Already a member?
+            <a
+              href="login.html"
+              id="loginLink"
+              style="
+                display: inline-block;
+                padding: 8px 12px;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: #fff;
+              "
+              >Login</a
+            >
+          </p>
+        </div>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3 class="footer-logo">
-                        <i class="fas fa-chart-line"></i>
-                        SportPredictPro
-                    </h3>
-                    <p>Your trusted source for accurate sports predictions and live scores.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="livescore.html">LiveScore</a></li>
-                        <li><a href="expert-tips.html">Expert Tips</a></li>
-                        <li><a href="vip.html">VIP</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2023 SportPredictPro. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-logo">
+              <i class="fas fa-chart-line"></i>
+              LOGIKS BET
+            </h3>
+            <p>
+              Your trusted source for accurate sports predictions and live
+              scores.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="livescore.html">LiveScore</a></li>
+              <li><a href="expert-tips.html">Expert Tips</a></li>
+              <li><a href="vip.html">VIP</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="copyright">
+          <p>© 2023 SportPredictPro. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const vipStatus = localStorage.getItem('vipStatus');
+      document.addEventListener("DOMContentLoaded", function () {
+        const vipStatus = localStorage.getItem("vipStatus");
 
-            const vipContent = document.querySelector('.vip-content');
-            const nonVipContent = document.querySelector('.non-vip-content');
+        const vipContent = document.querySelector(".vip-content");
+        const nonVipContent = document.querySelector(".non-vip-content");
 
-            if (vipStatus === 'active') {
-                vipContent.style.display = 'block'; // Show VIP content
-                nonVipContent.style.display = 'none'; // Hide non-VIP content
-            } else {
-                vipContent.style.display = 'none'; // Hide VIP content
-                nonVipContent.style.display = 'block'; // Show non-VIP content
-            }
+        if (vipStatus === "active") {
+          vipContent.style.display = "block"; // Show VIP content
+          nonVipContent.style.display = "none"; // Hide non-VIP content
+        } else {
+          vipContent.style.display = "none"; // Hide VIP content
+          nonVipContent.style.display = "block"; // Show non-VIP content
+        }
 
-            // Hover effect for the login link
-            const loginLink = document.getElementById('loginLink');
-            if (loginLink) {
-                loginLink.addEventListener('mouseover', function() {
-                    loginLink.classList.add('login-link-hover');
-                });
-                loginLink.addEventListener('mouseout', function() {
-                    loginLink.classList.remove('login-link-hover');
-                });
-            }
-        });
+        // Hover effect for the login link
+        const loginLink = document.getElementById("loginLink");
+        if (loginLink) {
+          loginLink.addEventListener("mouseover", function () {
+            loginLink.classList.add("login-link-hover");
+          });
+          loginLink.addEventListener("mouseout", function () {
+            loginLink.classList.remove("login-link-hover");
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
