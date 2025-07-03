@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found - LOGIKS BET</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--background, #f4f7fa);
+        margin: 0;
+      }
+      .error-container {
+        text-align: center;
+        margin-top: 8vh;
+      }
+      .error-icon {
+        font-size: 6rem;
+        color: var(--primary, #007bff);
+        animation: float 2.5s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-24px);
+        }
+      }
+      .error-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary, #007bff);
+        margin: 24px 0 8px 0;
+        letter-spacing: 2px;
+        animation: fadeInDown 1s;
+      }
+      .error-message {
+        color: #555;
+        font-size: 1.2rem;
+        margin-bottom: 32px;
+        animation: fadeIn 2s;
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .btn-home {
+        background: var(--primary, #007bff);
+        color: #fff;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        animation: fadeIn 2.5s;
+      }
+      .btn-home:hover {
+        background: #0056b3;
+      }
+      .logo-404 {
+        margin-top: 48px;
+        color: #222;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+        opacity: 0.7;
+      }
+      .runner-svg {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 18px auto;
+        display: block;
+        animation: runner-move 3s linear infinite;
+      }
+      @keyframes runner-move {
+        0% {
+          transform: translateX(-30px);
+        }
+        50% {
+          transform: translateX(30px);
+        }
+        100% {
+          transform: translateX(-30px);
+        }
+      }
+      /* Animated background walkers */
+      .walker {
+        position: fixed;
+        bottom: 0;
+        width: 60px;
+        height: 60px;
+        z-index: 0;
+        opacity: 0.85;
+        pointer-events: none;
+        animation: walk-horizontal 12s linear infinite;
+      }
+      .walker2 {
+        left: 10vw;
+        animation-delay: 2s;
+        animation-duration: 14s;
+      }
+      .walker3 {
+        left: 80vw;
+        animation-delay: 5s;
+        animation-duration: 10s;
+      }
+      @keyframes walk-horizontal {
+        0% {
+          left: -80px;
+        }
+        100% {
+          left: 110vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Animated background walkers -->
+    <svg class="walker" style="top: 60vh" viewBox="0 0 64 64" fill="none">
+      <g>
+        <circle cx="32" cy="16" r="8" fill="#FFD600" />
+        <rect x="28" y="24" width="8" height="18" rx="4" fill="#007bff" />
+        <rect
+          x="24"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(-20 24 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="-20 24 40"
+            to="20 24 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+        <rect
+          x="36"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(20 40 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="20 40 40"
+            to="-20 40 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+      </g>
+    </svg>
+    <svg
+      class="walker walker2"
+      style="top: 70vh"
+      viewBox="0 0 64 64"
+      fill="none"
+    >
+      <g>
+        <circle cx="32" cy="16" r="8" fill="#FF6F61" />
+        <rect x="28" y="24" width="8" height="18" rx="4" fill="#007bff" />
+        <rect
+          x="24"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(-20 24 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="-20 24 40"
+            to="20 24 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+        <rect
+          x="36"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(20 40 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="20 40 40"
+            to="-20 40 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+      </g>
+    </svg>
+    <svg
+      class="walker walker3"
+      style="top: 80vh"
+      viewBox="0 0 64 64"
+      fill="none"
+    >
+      <g>
+        <circle cx="32" cy="16" r="8" fill="#00C853" />
+        <rect x="28" y="24" width="8" height="18" rx="4" fill="#007bff" />
+        <rect
+          x="24"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(-20 24 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="-20 24 40"
+            to="20 24 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+        <rect
+          x="36"
+          y="40"
+          width="4"
+          height="12"
+          rx="2"
+          fill="#007bff"
+          transform="rotate(20 40 40)"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="20 40 40"
+            to="-20 40 40"
+            dur="0.5s"
+            repeatCount="indefinite"
+            direction="alternate"
+          />
+        </rect>
+      </g>
+    </svg>
+    <div class="error-container">
+      <svg class="runner-svg" viewBox="0 0 64 64" fill="none">
+        <g>
+          <circle cx="32" cy="16" r="8" fill="#FFD600" />
+          <ellipse
+            cx="32"
+            cy="40"
+            rx="16"
+            ry="20"
+            fill="#007bff"
+            opacity="0.15"
+          />
+          <rect x="28" y="24" width="8" height="18" rx="4" fill="#007bff" />
+          <rect
+            x="24"
+            y="40"
+            width="4"
+            height="12"
+            rx="2"
+            fill="#007bff"
+            transform="rotate(-20 24 40)"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="-20 24 40"
+              to="20 24 40"
+              dur="0.5s"
+              repeatCount="indefinite"
+              direction="alternate"
+            />
+          </rect>
+          <rect
+            x="36"
+            y="40"
+            width="4"
+            height="12"
+            rx="2"
+            fill="#007bff"
+            transform="rotate(20 40 40)"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="20 40 40"
+              to="-20 40 40"
+              dur="0.5s"
+              repeatCount="indefinite"
+              direction="alternate"
+            />
+          </rect>
+        </g>
+      </svg>
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="error-title">404</div>
+      <div class="error-message">
+        Oops! The page you’re looking for doesn’t exist.<br />
+        Let’s get you back to winning with LOGIKS BET.
+      </div>
+      <button class="btn-home" onclick="window.location.href='index.html'">
+        Go to Homepage
+      </button>
+      <div class="logo-404"><i class="fas fa-chart-line"></i> LOGIKS BET</div>
+    </div>
+  </body>
+</html>
